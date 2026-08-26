@@ -235,6 +235,9 @@
     }
 
     return h('div', null,
+      // 官方设置对话框左侧导航无滚动（overflow:visible 溢出即裁剪）：18 项时最底项被裁不可点。
+      // 组件化注入修复（2026-08-27 真机取证 scrollHeight 852 > clientHeight 752）——纯样式覆盖，不操作 DOM。
+      h('style', { key: 'cog-nav-scroll' }, '[role=\"dialog\"] nav { overflow-y: auto; overscroll-behavior: contain; }'),
       h('div', { style: { marginBottom: 10 } }, tabEls),
       tab === 'memory' ? memoryBody : tab === 'rules' ? rulesBody : tab === 'decisions' ? decisionsBody : tab === 'categories' ? catBody : auditBody,
     );
@@ -242,9 +245,10 @@
 
   function apply(ctx) {
     ctx.effect(function () { ctx.locale.register(NS, { zh: zh, en: zh }); });
+
     ctx.slots.inject('settings.section', function () {
       return ctx.slots.register({
-        name: 'settings.section', id: 'cognitio', order: 60,
+        name: 'settings.section', id: 'cognitio', order: 45,
         label: function () { return zh.nav; }, locale: NS, inject: function () { return { t: function (k) { return zh[k] || k; } }; },
       }, function () { return React.createElement(Section, { t: function (k) { return zh[k] || k; } }); });
     });
