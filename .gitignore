@@ -1,0 +1,18 @@
+# 数据与凭据（绝不入库）
+.memory/
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+xilin-secrets.env
+*.env
+vault-index.sqlite
+
+# 临时产物
+tmp-*.mjs
+*.bak-*
+node_modules/
+*.tgz
+
+# IDE
+.idea/
+.vscode/

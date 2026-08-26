@@ -1,0 +1,61 @@
+{
+  "name": "dsh-cognitio-core",
+  "version": "0.3.0",
+  "description": "cognitio sentinel bundle: 哨兵注入/出错归入/回合归档/动作前观测 四事件监听聚合 + 记忆井联动（官方插件形态）",
+  "type": "module",
+  "main": "lib/index.mjs",
+  "types": "types/index.d.ts",
+  "files": [
+    "lib",
+    "src",
+    "types",
+    "scripts",
+    "skills",
+    "cordis.patch.yml",
+    "dsh.plugin.json",
+    "docs",
+    "README.md",
+    "client"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prepare": "node scripts/build.mjs",
+    "prepack": "node scripts/build.mjs",
+    "test": "node --test ../.mcp-servers/memory-server.test.mjs ../.mcp-servers/sentinel-plugin.test.mjs ../.mcp-servers/p2-plugins.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.4.3"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-agent": "^0.1.0-rc.6"
+  },
+  "license": "MIT",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "default": "./lib/index.mjs"
+    },
+    "./client": "./client/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  }
+}

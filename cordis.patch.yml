@@ -1,0 +1,14 @@
+# dsh-cognitio-core bundle patch —— 官方插件形态挂载（迁移中：聚合引用既有插件，行为零变化）
+#
+# 一个插件行聚合四类事件监听（与工作区手编四行等价）：
+#   pre-step 哨兵注入 / agent-error 出错归入 / turn-stopping 回合归档 / tools-pre-execute 动作前观测
+#
+# 迁移注意事项（原子替换规则，防双挂）：
+#   1. 本行 insert 后，须从各 preset 的 agent.cordis.yml 移除旧四行
+#      （sentinel-recall / error-capture / turn-archive / action-guard），
+#      禁止新旧同挂——insert id 查重教训（rules/dev/plugin-insert-id-check）。
+#   2. id 为 dsh-cognitio-core（新命名空间），与旧 id 无冲突。
+#   3. 回滚 = dsh plugin remove dsh-cognitio-core（或删本行）并恢复旧四行。
+- insert:
+    - id: dsh-cognitio-core
+      name: dsh-cognitio-core

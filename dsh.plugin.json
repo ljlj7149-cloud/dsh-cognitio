@@ -1,0 +1,9 @@
+{
+  "name": "dsh-cognitio-core",
+  "description": "cognitio 哨兵插件：agent/pre-step 注入 + agent/error 归入 + turn-stopping 归档 + tools/pre-execute 观测（四事件聚合，记忆井联动）",
+  "version": "0.1.0",
+  "entry": {
+    "name": "dsh-cognitio-core",
+    "inject": []
+  }
+}
